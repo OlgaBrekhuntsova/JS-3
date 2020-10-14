@@ -20,8 +20,7 @@ function calculateTotalPrice (array, prop) {
   for (let i = 0; i < array.length; i += 1) {
      for (const key in array[i]) {
        if (array[i][key] === prop) {
-         let j = 1;  
-      totalCost += Object.values(array[i])[j] * Object.values(array[i])[j + 1];
+        totalCost += Object.values(array[i])[1] * Object.values(array[i])[2];
        };
     };
       }
