@@ -1,46 +1,52 @@
-// Задача 2 - 6
-// Конструкция new Array(10) создаст массив, длинной в 10 элементов.
-// Значения в таком массиве будут отсутствовать, т.е.не будет даже undefined.
-// Поэтому такой массив нужно заполнить значениями для дальнейшего использования.
+// Задача 3-6
+// Суммирование значений свойства из массива объектов
+// Напиши функцию calculateTotalPrice(allProdcuts, productName), которая получает массив объектов
+// и имя продукта(значение свойства name).Возвращает общую стоимость продукта(цена умноженная на количество).
 
-// Есть еще способ создания и заполнения массива - можно создать пустой массив[] и заполнять его методом push()
+// Вызовы функции для проверки работоспособности твоей реализации.
 
-// Быстрая обработка массива
-// Преимущество создания массива заданной длины перед добавлением в пустой массив в том,
-//   что метод push() медленнее обрабатывается.
+// calculateTotalPrice(products, 'Радар'));
+// 9080
 
-//   Если`new Array()` будет содержать более одного аргумента, то будет создан массив с элементами из аргументов.
-//     Пример:
+// calculateTotalPrice(products, 'Сканер')); // 10200
 
-// new Array(3);
-// // [,,]
+// calculateTotalPrice(products, 'Захват')); // 2400
 
-// new Array(1, 2, 3);
-// // [1, 2, 3]
-// Быстрое создание массива
-// Пустой массив.Вызов new Array() создаст пустой массив[].
-// Но это более медленный способ создания массива по сравнению с использованием литерала.
-// Если нужен пустой массив, то рекомендуется использовать литерал массива.
-
-// const arrFast = []; // быстрее
-// const arrSlow = new Array(); // медленнее
-// Создание нового массива на основе преобразования данных из старого массива
-// Напиши функцию mapArray(array), принимающую 1 параметр array - массив чисел.
-// Функция создает новый массив numbers размером в длину массива array и заполняет его числами
-// из массива array умноженными на 10. Для перебора массива и добавления новых значений используй цикл for.
-// По завершению перебора массива array возвращается массив numbers.
-function mapArray(array) {
+// calculateTotalPrice(products, 'Дроид')); // 2800
+function calculateTotalPrice (array, prop) {
   'use strict';
-  const numbers = new Array(array.length);
+  // Write code under this line
+  let totalCost = 0;
   for (let i = 0; i < array.length; i += 1) {
-    // Write code under this line
-    numbers[i] = array[i] * 10;
-  }
-  return numbers;
+     for (const key in array[i]) {
+       if (array[i][key] === prop) {
+         let j = 1;  
+      totalCost += Object.values(array[i])[j] * Object.values(array[i])[j + 1];
+       };
+    };
+      }
+      return totalCost;
 }
 
-console.log(mapArray([-2, 0, 2]));
-// [-20, 0, 20]
+// Объекты и ожидаемый результат
+const products = [
+    { name: 'Радар', price: 1300, quantity: 4 },
+    { name: 'Радар', price: 1280, quantity: 2 },
+    { name: 'Радар', price: 1320, quantity: 1 },
+    { name: 'Сканер', price: 2700, quantity: 1 },
+    { name: 'Сканер', price: 2500, quantity: 3 },
+    { name: 'Дроид', price: 400, quantity: 7 },
+    { name: 'Захват', price: 1200, quantity: 2 }
+]; 
 
-console.log(mapArray([-2.5, 0, 2.5]));
-// [-25, 0, 25]
+console.log(calculateTotalPrice(products, 'Радар'));  
+// 9080
+
+console.log(calculateTotalPrice(products, 'Сканер')); 
+// 10200
+
+console.log(calculateTotalPrice(products, 'Захват'));
+// 2400
+
+console.log(calculateTotalPrice(products, 'Дроид')); 
+// 2800
