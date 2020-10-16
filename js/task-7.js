@@ -1,32 +1,97 @@
-// Задача 2 - 7
-// Создание нового массива на основе отбора из исходного массива
-// Напиши функцию filterArray(array), принимающую 1 параметр array - массив.
-// Функция проверяет каждое значение массива - является ли значение конечным числом(Number.isFinite).
-// Для проверки используй цикл for.Числа добавляются в новый массив numbers с помощью метода push,
-//     а не числа - игнорируются.По завершению проверки массива array возвращается массив numbers.
-function filterArray(array) {
-  'use strict';
-  const numbers = [];
-  for (let i = 0; i < array.length; i += 1) {
-    // Write code under this line
-    if (Number.isFinite(array[i])) {
-      numbers.push(array[i]);
-    }
-  }
-  return numbers;
+// Задание 7 - дополнительное, выполнять не обязательно
+// Напиши скрипт управления личным кабинетом интернет банка.
+// Есть объект account в котором необходимо реализовать методы для работы
+// с балансом и историей транзакций.
+
+/*
+ * Типов транзацкий всего два.
+ * Можно положить либо снять деньги со счета.
+ */
+const Transaction = {
+  DEPOSIT: 'deposit',
+  WITHDRAW: 'withdraw',
+};
+
+/*
+ * Каждая транзакция это объект со свойствами: id, type и amount
+ */
+
+const account = {
+  // Текущий баланс счета
+  balance: 0,
+
+  // История транзакций
+  transactions: [],
+
+  /*
+   * Метод создает и возвращает объект транзакции.
+   * Принимает сумму и тип транзакции.
+   */
+  createTransaction(amount, type) {
+    transactionObj['id'] += 1;
+    transactionObj['type']= type;
+    transactionObj['amount']= amount;
+    
+    // transactions.push(transactionObj);
+    return console.log(transactions.push(transactionObj{id, type, amount}));
+    },
+
+  /*
+   * Метод отвечающий за добавление суммы к балансу.
+   * Принимает сумму танзакции.
+   * Вызывает createTransaction для создания объекта транзакции
+   * после чего добавляет его в историю транзакций
+   */
+  deposit(amount) {},
+
+  /*
+   * Метод отвечающий за снятие суммы с баланса.
+   * Принимает сумму танзакции.
+   * Вызывает createTransaction для создания объекта транзакции
+   * после чего добавляет его в историю транзакций.
+   *
+   * Если amount больше чем текущий баланс, выводи сообщение
+   * о том, что снятие такой суммы не возможно, недостаточно средств.
+   */
+  withdraw(amount) {},
+
+  /*
+   * Метод возвращает текущий баланс
+   */
+  getBalance() {},
+
+  /*
+   * Метод ищет и возвращает объект транзации по id
+   */
+  getTransactionDetails(id) {},
+
+  /*
+   * Метод возвращает количество средств
+   * определенного типа транзакции из всей истории транзакций
+   */
+  getTransactionTotal(type) {},
+};
+const transactionObj = {id:0, type:'нет транзакций', amount:0 };
+// let id = 0;
+const dataInput = function () {
+   switch (prompt('Введите тип транзакции: + (пополнение) или - (снятие)')) {
+    case '+':
+      console.log(Transaction['DEPOSIT']);
+      // console.log(Number(prompt('Input transaction amount')));
+      account.createTransaction(Number(prompt('Введите сумму')), Transaction['DEPOSIT']);
+      break;
+  
+    case '-':
+      console.log(Transaction['WITHDRAW']);
+      account.createTransaction(Number(prompt('Введите сумму')), Transaction['WITHDRAW']);
+      break;
+
+    default:
+      if ( confirm ('Введите корректно тип транзакции: значок "плюс" или "минус". Попробовать еще раз?')) {dataInput()};
+       }
 }
+dataInput();
+// createTransaction(Number(prompt('Input transaction amount')), amountOperation);
 
-console.log(filterArray([-2, 0, 2]));
-// [-2, 0, 2]
 
-console.log(filterArray([1, NaN, Infinity]));
-// [1]
-
-console.log(filterArray([0, -0, 100, '100']));
-// [0, 0, 100]
-
-console.log(filterArray([undefined, false, null, [], 1]));
-// [1]
-
-console.log(filterArray([{}, () => {}, 2]));
-// [2]
+// console.log(`Баланс счета равен ${account[balance]}|n История транзакций: ${transactions[]});

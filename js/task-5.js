@@ -11,11 +11,9 @@ function getAllPropValues(array, prop) {
   // Write code under this line 
   const filteredArray = [];
   for (let i = 0; i < array.length; i+=1) {
-      for (const key in array[i]) {
-        if (key === prop) {
-        filteredArray.push(array[i][key])
+          if (prop in array[i]) {
+        filteredArray.push(array[i][prop])
       }
-    }
     }
   return filteredArray;
 }

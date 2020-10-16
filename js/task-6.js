@@ -17,13 +17,13 @@ function calculateTotalPrice (array, prop) {
   'use strict';
   // Write code under this line
   let totalCost = 0;
-  for (let i = 0; i < array.length; i += 1) {
-     for (const key in array[i]) {
-       if (array[i][key] === prop) {
-        totalCost += Object.values(array[i])[1] * Object.values(array[i])[2];
+   for (const arrElement of array){
+    let values = Object.values(arrElement);
+        if (values[0] === prop) {
+        totalCost += values[1] * values[2];
        };
     };
-      }
+      
       return totalCost;
 }
 
