@@ -29,12 +29,11 @@ const account = {
    */
   createTransaction(amount, type) {
     transactionObj['id'] += 1;
-    transactionObj['type']= type;
-    transactionObj['amount']= amount;
-    
-    // transactions.push(transactionObj);
-    return console.log(transactions.push(transactionObj{id, type, amount}));
-    },
+    transactionObj['type'] = type;
+    transactionObj['amount'] = amount;
+    transactions.push(transactionObj);
+    return console.log(transactionObj);
+      },
 
   /*
    * Метод отвечающий за добавление суммы к балансу.
@@ -71,8 +70,9 @@ const account = {
    */
   getTransactionTotal(type) {},
 };
-const transactionObj = {id:0, type:'нет транзакций', amount:0 };
-// let id = 0;
+const transactionObj = { id: 0, type: 'нет транзакций', amount: 0 };
+const transactions = [];
+// Функция ввода данных
 const dataInput = function () {
    switch (prompt('Введите тип транзакции: + (пополнение) или - (снятие)')) {
     case '+':
