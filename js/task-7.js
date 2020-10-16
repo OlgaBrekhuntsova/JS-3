@@ -31,8 +31,7 @@ const account = {
     transactionObj['id'] += 1;
     transactionObj['type'] = type;
     transactionObj['amount'] = amount;
-    transactions.push(transactionObj);
-    return console.log(transactionObj);
+    return transactionObj;
       },
 
   /*
@@ -41,7 +40,11 @@ const account = {
    * Вызывает createTransaction для создания объекта транзакции
    * после чего добавляет его в историю транзакций
    */
-  deposit(amount) {},
+  deposit(amount) {
+    this.balance += amount;
+    return transactions.push(this.createTransaction(amount, Transaction['DEPOSIT']));
+    console.log(deposit);
+  },
 
   /*
    * Метод отвечающий за снятие суммы с баланса.
@@ -78,12 +81,14 @@ const dataInput = function () {
     case '+':
       console.log(Transaction['DEPOSIT']);
       // console.log(Number(prompt('Input transaction amount')));
-      account.createTransaction(Number(prompt('Введите сумму')), Transaction['DEPOSIT']);
+      // account.createTransaction(Number(prompt('Введите сумму')), Transaction['DEPOSIT']);
+       account.deposit(Number(prompt('Введите сумму')));
       break;
   
     case '-':
       console.log(Transaction['WITHDRAW']);
-      account.createTransaction(Number(prompt('Введите сумму')), Transaction['WITHDRAW']);
+      // account.createTransaction(Number(prompt('Введите сумму')), Transaction['WITHDRAW']);
+        account.withdraw(Number(prompt('Введите сумму')));
       break;
 
     default:
