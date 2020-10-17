@@ -31,6 +31,7 @@ const account = {
     transactionObj['id'] += 1;
     transactionObj['type'] = type;
     transactionObj['amount'] = amount;
+    this.getTransactionTotal(type);
     return transactionObj;
       },
 
@@ -42,9 +43,10 @@ const account = {
    */
   deposit(amount) {
     this.balance += amount;
-    return transactions.push(this.createTransaction(amount, Transaction['DEPOSIT']));
-    console.log(deposit);
-  },
+    this.transactions.push(this.createTransaction(amount, Transaction['DEPOSIT']));
+    console.log(this.transactions);
+    return this.getBalance();
+      },
 
   /*
    * Метод отвечающий за снятие суммы с баланса.
@@ -55,12 +57,21 @@ const account = {
    * Если amount больше чем текущий баланс, выводи сообщение
    * о том, что снятие такой суммы не возможно, недостаточно средств.
    */
-  withdraw(amount) {},
+  withdraw(amount) {
+    if (amount <= this.balance) {
+      this.balance -= amount;
+      this.transactions.push(this.createTransaction(amount, Transaction['WITHDRAW']));
+      return this.getBalance();
+    }
+    else { if (confirm('Снятие невозможно, недостаточно средств. Хотите осуществить другую операцию?')){ dataInput() } };
+  },
 
   /*
    * Метод возвращает текущий баланс
    */
-  getBalance() {},
+  getBalance() {
+    console.log(this.balance);
+  },
 
   /*
    * Метод ищет и возвращает объект транзации по id
@@ -71,32 +82,57 @@ const account = {
    * Метод возвращает количество средств
    * определенного типа транзакции из всей истории транзакций
    */
-  getTransactionTotal(type) {},
-};
+  getTransactionTotal(type) {
+    console.log(type);
+    if (type === Transaction['DEPOSIT']) {
+      totalDeposits += transactionObj['amount'];
+    }
+      else
+      {totalWithdraws += transactionObj['amount'];
+      };
+    return console.log(`Всего на счет было внесено ${totalDeposits} у.е.\nВсего со счета было снято ${totalWithdraws} у.е.`);
+  },
+  };
 const transactionObj = { id: 0, type: 'нет транзакций', amount: 0 };
 const transactions = [];
-// Функция ввода данных
+let totalDeposits = 0;
+let totalWithdraws = 0;
+// Функция ввода суммы
+const amountInput = function () {
+  const amountCurrent = Number(prompt('Введите сумму'));
+  switch (amountCurrent) {
+    case null:
+      break;
+    case '> 0':
+      const amount = amountCurrent;
+      return amount;
+     default:
+       if (confirm('Сумма не корректна. Введите число больше 0. Попробовать еще раз?')) {
+        return amountInput();
+     };
+  };
+// Функция ввода типа данных
 const dataInput = function () {
-   switch (prompt('Введите тип транзакции: + (пополнение) или - (снятие)')) {
+  switch (prompt('Введите тип транзакции: + (пополнение) или - (снятие)')) {
     case '+':
       console.log(Transaction['DEPOSIT']);
-      // console.log(Number(prompt('Input transaction amount')));
-      // account.createTransaction(Number(prompt('Введите сумму')), Transaction['DEPOSIT']);
-       account.deposit(Number(prompt('Введите сумму')));
+      account.deposit(amountInput());
       break;
   
     case '-':
       console.log(Transaction['WITHDRAW']);
-      // account.createTransaction(Number(prompt('Введите сумму')), Transaction['WITHDRAW']);
-        account.withdraw(Number(prompt('Введите сумму')));
+      account.withdraw(amountInput());
       break;
-
+    case null:
+      break;
     default:
-      if ( confirm ('Введите корректно тип транзакции: значок "плюс" или "минус". Попробовать еще раз?')) {dataInput()};
-       }
-}
+      if (confirm('Введите корректно тип транзакции: значок "плюс" или "минус". Попробовать еще раз?')) { dataInput() };
+  }
+};
+
+
 dataInput();
-// createTransaction(Number(prompt('Input transaction amount')), amountOperation);
+console.log(transactionObj);
 
-
-// console.log(`Баланс счета равен ${account[balance]}|n История транзакций: ${transactions[]});
+while (confirm('Желаете выполнить еще одну транзакцию?')) { dataInput() };
+console.log(`Баланс счета: ${account.balance}\nИстория транзакций: ${account.transactions}`)
