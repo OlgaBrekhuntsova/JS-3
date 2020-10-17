@@ -82,19 +82,18 @@ const account = {
    * определенного типа транзакции из всей истории транзакций
    */
   getTransactionTotal(type) {
-     if (type === Transaction['DEPOSIT']) {
-      totalDeposits += transactionObj['amount'];
+    if (type === Transaction['DEPOSIT']) {
+    totalTransactionsAmounts['deposits'] += transactionObj['amount'];
     }
-      else
-      {totalWithdraws += transactionObj['amount'];
-      };
-    return console.log(`Всего на счет было внесено ${totalDeposits} у.е.\nВсего со счета было снято ${totalWithdraws} у.е.`);
-  },
+    else
+   {totalTransactionsAmounts['withdraws'] += transactionObj['amount'];
+     };
+    return  totalTransactionsAmounts;
+      },
   };
 const transactionObj = { id: 0, type: 'нет транзакций', amount: 0 };
 const transactions = [];
-let totalDeposits = 0;
-let totalWithdraws = 0;
+const totalTransactionsAmounts = { deposits: 0, withdraws: 0 };
 
 // Функция ввода суммы
 const amountInput = function () {
@@ -131,3 +130,5 @@ dataInput();
 while (confirm('Желаете выполнить еще одну транзакцию?')) { dataInput() };
 console.log(`Баланс счета: ${account.balance}\nИстория транзакций: ${account.transactions}`);
 console.log(account.transactions);
+console.log(`Всего на счет было внесено ${totalTransactionsAmounts['deposits']} у.е.\nВсего со счета было снято ${totalTransactionsAmounts['withdraws']} у.е.`);
+  
