@@ -43,7 +43,6 @@ const account = {
    */
   deposit(amount) {
     this.balance += amount;
-    this.getBalance();
     return this.transactions.push({ ...this.createTransaction(amount, Transaction['DEPOSIT']) });
   },
 
@@ -59,17 +58,16 @@ const account = {
   withdraw(amount) {
     if (amount <= this.balance) {
       this.balance -= amount;
-      this.getBalance();
       return this.transactions.push({...this.createTransaction(amount, Transaction['WITHDRAW']) });
     }
-    else { if (confirm('Снятие невозможно, недостаточно средств. Хотите осуществить другую операцию?')){ dataInput() } return};
+    else { if (confirm(`Снятие невозможно, недостаточно средств. Ваш баланс ${this.getBalance()} у.е. Хотите осуществить другую операцию?`)){ dataInput() } return};
   },
 
   /*
    * Метод возвращает текущий баланс
    */
   getBalance() {
-    console.log(`Баланс: ${this.balance}`);
+    return this.balance;
   },
 
   /*
@@ -151,7 +149,7 @@ const dataInput = function () {
 dataInput();
 
 while (confirm('Желаете выполнить еще одну транзакцию?')) { dataInput() };
-console.log(`Баланс счета: ${account.balance}\nИстория транзакций: ${account.transactions}`);
+console.log(`Баланс счета: ${account.getBalance()}\nИстория транзакций: ${account.transactions}`);
 console.log(account.transactions);
 console.log(`Всего на счет было внесено ${totalTransactionsAmounts['deposits']} у.е.\nВсего со счета было снято ${totalTransactionsAmounts['withdraws']} у.е.`);
 if (confirm('Узнать детали транзакции?')) {
