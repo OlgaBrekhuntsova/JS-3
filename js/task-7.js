@@ -75,7 +75,29 @@ const account = {
   /*
    * Метод ищет и возвращает объект транзации по id
    */
-  getTransactionDetails(id) {},
+  getTransactionDetails() {
+    const idSearch = Number(prompt('Введите код транзакции (id)'));
+    console.log(idSearch);
+    if (idSearch > 0) {
+      let check = 0;
+        for (const transactionItem of this.transactions) {
+        let values = Object.values(transactionItem);
+        if (values[0] === idSearch) {
+          check = 1;
+          console.log(`Детали транзакции с кодом ${idSearch}:`);
+          console.log(transactionItem);
+          break;
+        };
+      };
+      if (check === 0) {
+        console.log(`Транзакция с кодом ${idSearch} не найдена`);
+      };
+    }
+    else {
+      console.log(`Код не корректен. Введите целое число > 0`);
+    };
+  while (confirm('Желаете узнать детали транзакции другим id?')) { this.getTransactionDetails() };
+        },
 
   /*
    * Метод возвращает количество средств
@@ -102,7 +124,8 @@ const amountInput = function () {
       return amountCurrent; }
   if (confirm('Сумма не корректна. Введите число больше 0. Попробовать еще раз?')) { return amountInput(); }
   return; 
-   };
+};
+   
 // Функция ввода типа данных
 const dataInput = function () {
   let amountValue;
@@ -131,4 +154,6 @@ while (confirm('Желаете выполнить еще одну транзак
 console.log(`Баланс счета: ${account.balance}\nИстория транзакций: ${account.transactions}`);
 console.log(account.transactions);
 console.log(`Всего на счет было внесено ${totalTransactionsAmounts['deposits']} у.е.\nВсего со счета было снято ${totalTransactionsAmounts['withdraws']} у.е.`);
-  
+if (confirm('Узнать детали транзакции?')) {
+  account.getTransactionDetails();
+};
