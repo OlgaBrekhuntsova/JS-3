@@ -17,14 +17,12 @@ function calculateTotalPrice (array, prop) {
   'use strict';
   // Write code under this line
   let totalCost = 0;
-   for (const arrElement of array){
-    let values = Object.values(arrElement);
-        if (values[0] === prop) {
-        totalCost += values[1] * values[2];
-       };
+  for (const arrElement of array) {
+    if (arrElement.name === prop) {
+      totalCost += arrElement.price * arrElement.quantity;
     };
-      
-      return totalCost;
+  };
+    return totalCost;
 }
 
 // Объекты и ожидаемый результат
