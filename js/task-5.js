@@ -10,9 +10,9 @@ function getAllPropValues(array, prop) {
   'use strict';
   // Write code under this line 
   const filteredArray = [];
-  for (let i = 0; i < array.length; i+=1) {
-          if (prop in array[i]) {
-        filteredArray.push(array[i][prop])
+  for (const arrElement of array) {
+   if (prop in arrElement) {
+  filteredArray.push(arrElement[prop])
       }
     }
   return filteredArray;
