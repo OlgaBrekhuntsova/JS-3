@@ -149,7 +149,7 @@ const dataInput = function () {
 dataInput();
 
 while (confirm('Желаете выполнить еще одну транзакцию?')) { dataInput() };
-console.log(`Баланс счета: ${account.getBalance()}\nИстория транзакций: ${account.transactions}`);
+console.log(`Баланс счета: ${account.getBalance()}\nИстория транзакций: ${JSON.stringify(account.transactions)}`);
 console.log(account.transactions);
 console.log(`Всего на счет было внесено ${totalTransactionsAmounts['deposits']} у.е.\nВсего со счета было снято ${totalTransactionsAmounts['withdraws']} у.е.`);
 if (confirm('Узнать детали транзакции?')) {
